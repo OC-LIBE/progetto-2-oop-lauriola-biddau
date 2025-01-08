@@ -1,6 +1,6 @@
 import random
 from modules.card import Card
-suits = ('Spades', 'Hearts', 'Clubs', 'Diamonds')
+suits = ('Hearts', 'Diamonds', 'Clubs', 'Spades')
 
 
 class Deck:
