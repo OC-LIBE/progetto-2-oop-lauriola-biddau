@@ -1,6 +1,7 @@
 import streamlit as st
 from modules.card import Card
 from modules.deck import Deck
+from modules.player import Player
 
 st.set_page_config(
    layout="wide",
@@ -17,20 +18,46 @@ if "iniziato" not in st.session_state:
 if "deck" not in st.session_state:
     st.session_state["deck"] = Deck(1)
 
-@st.dialog("Place a bet")
-def bet():
-    with st.form("Bet", clear_on_submit=True, enter_to_submit=False, border=False):
 
-        bet = st.number_input("", min_value=1, max_value=500, value=1, key='bet')
+@st.dialog("Number of players")
+def players():
+    with st.form("Players", clear_on_submit=True, enter_to_submit=False, border=False):
+        nPlayers = st.number_input("Numero giocatori", min_value=1, max_value=7, value=1, label_visibility="hidden")
 
         if st.form_submit_button("Invia"):
-            st.session_state["iniziato"] = True
+            st.session_state["nPlayers"] = nPlayers
             st.session_state["deck"].shuffle()
             st.rerun()
 
-if st.session_state["iniziato"] == False:
-    if st.button("Place a bet"):
-        bet()
+if "nPlayers" not in st.session_state:
+    if st.button("start"):
+        players()
+
+
+@st.dialog("Player place a bet")
+def bet(numPlrs):
+    with st.form(f"Bet", clear_on_submit=True, enter_to_submit=False, border=False):
+
+        for i in range(numPlrs):
+
+            bet = st.number_input(f"Player {i+1}:", min_value=1, max_value=500, value=10)
+            st.session_state["PLAYERS"][i].bet = bet
+
+        if st.form_submit_button("Invia"):
+            st.session_state["iniziato"] = True
+            st.rerun()
+
+if "PLAYERS" not in st.session_state:
+    st.session_state["PLAYERS"] = []
+
+if st.session_state["iniziato"] == False and "nPlayers" in st.session_state:
+
+    for i in range(st.session_state["nPlayers"]):
+        plr = Player()
+        st.session_state["PLAYERS"].append(plr)
+
+    if st.session_state["PLAYERS"][0].bet == 0:  # first player is always okay to check
+        bet(len(st.session_state["PLAYERS"]))
 
 
 if st.session_state["iniziato"] == True:
