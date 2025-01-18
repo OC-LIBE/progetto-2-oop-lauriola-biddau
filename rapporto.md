@@ -35,3 +35,12 @@ un bottone chiamato "place a bet" apre un @st.dialog con una st.form che richied
 > i commenti<br>`# st.session_state["iniziato"] = False`<br>`# st.session_state["deck"] = Deck(1)`<br>
 servono per rapidamente resettare il session_state. Più avanti bisognerà automatizzare questo processo.
 <br>
+
+## 15.01.2025:
+### aggiunte:
+> Aggiunto il modulo `player.py` con la classe `Player`. un oggetto `Player` ha come attributi i propri soldi, la propria puntata e le proprie carte.
+
+> Un bottone "Start" apre un `st.dialog` con una `st.form` che chiede il numero di giocatori (min 1, max 7).<br>
+Da questa `st.form` si salva il numero di giocatori e si mescola il mazzo.
+
+> Si creano gli oggetti `Player`, che verranno salvati con i loro attributi in `st.session_state["PLAYERS"]` e si apre un st.dialog con una st.form in cui vanno inserite le puntate dei giocatori, salvate in `st.session_state["PLAYERS"]` sotto i rispettivi giocatori.
