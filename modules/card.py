@@ -31,7 +31,15 @@ class Card:
 
         self.image_location = 'static/images/{}{}.png'.format(
             self.short_rank, self.short_suit)
+    
+    def __repr__(self):
+        return f"{self.short_rank, self.short_suit}"
         
     @property
-    def image(self):
+    def front_image(self):
         return self.image_location
+    
+    @property
+    def back_image(self):
+        return self.image_location  # da modificare con l'immagine retro
+    

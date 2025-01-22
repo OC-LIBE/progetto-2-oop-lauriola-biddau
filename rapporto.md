@@ -44,3 +44,22 @@ servono per rapidamente resettare il session_state. Più avanti bisognerà autom
 Da questa `st.form` si salva il numero di giocatori e si mescola il mazzo.
 
 > Si creano gli oggetti `Player`, che verranno salvati con i loro attributi in `st.session_state["PLAYERS"]` e si apre un st.dialog con una st.form in cui vanno inserite le puntate dei giocatori, salvate in `st.session_state["PLAYERS"]` sotto i rispettivi giocatori.
+<br>
+
+## 22.01.2025:
+### aggiunte:
+> Aggiunte le classi `HumanPlayer` e `Dealer` ereditarie di `Player` e la classe `Hand` incapsulata in `Player`.<br>
+`HumanPlayer` contiene le informazioni sui giocatori come nome, soldi e la mano. La classe `Hand` permette di calcolare velocemente il valore della mano con la proprietà `score()` e di aggiungere una carta alla mano con `addCard()`.<br>
+La classe `Dealer` eredita e possiede solamente `Hand`.
+
+> Nel dialogo `bet()` si chiede anche il nome del giocatore oltre alla puntata.<br>
+
+> Adesso viene visualizzato il nome di ogni giocatore, seguito dalle sue carte. Per primo c'è il dealer.<br>
+Le carte vengono assegnate con un ciclo in `app.py` ai giocatori e al dealer.
+
+> In st.session_state vengono salvati i giocatori con anche il loro nome, soldi, carte, che vengono visualizzate usando `short_rank` e `short_suit`, i due possibili valori della mano e la loro puntata.
+
+### obiettivi:
+> Trovare un migliore layout per la visualizzazione delle carte.
+
+> Programmare le possibili azioni di gioco per i giocatori e per il dealer.
