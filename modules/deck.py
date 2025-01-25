@@ -25,7 +25,6 @@ class Deck:
             return False
         drawn_card = self.cards[0]
         self.cards.remove(self.cards[0])
-        print(len(self.cards))
         return drawn_card
 
     def reset(self):

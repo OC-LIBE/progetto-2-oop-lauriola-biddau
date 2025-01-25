@@ -63,3 +63,17 @@ Le carte vengono assegnate con un ciclo in `app.py` ai giocatori e al dealer.
 > Trovare un migliore layout per la visualizzazione delle carte.
 
 > Programmare le possibili azioni di gioco per i giocatori e per il dealer.
+<br>
+
+## 25.01.2025:
+### aggiunte:
+> Vengono create tante colonne quanti giocatori. Ogni colonna contiene il nome e le carte di uno dei giocatori.<br>
+Le carte del Dealer vengono visualizzate in alto, dentro alla colonna in mezzo, che è calcolata con `len(st.session_state["PLAYERS"]) // 2`.
+
+> Per garantire un buon layout, la variabile `card_width` non è più fissa a 105, ma dipende da una funzione di secondo grado:<br>
+`-35/36 * x**2 + 105`<br>
+dove il parametro x corrisponde al numero di giocatori (`len(st.session_state["PLAYERS"])`).
+
+### obiettivi:
+> Programmare le possibili azioni di gioco per i giocatori e per il dealer.
+<br>

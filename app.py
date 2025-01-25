@@ -6,7 +6,6 @@ from modules.player import HumanPlayer, Dealer
 st.set_page_config(
    layout="wide",
 )
-card_width=105
 
 
 if "iniziato" not in st.session_state:
@@ -37,7 +36,7 @@ def bet(numPlrs):
 
         for i in range(numPlrs):
             name = st.text_input(f"Player{i+1} Name:")
-            bet = st.number_input(f"Player{i+1} Bet:", min_value=1, max_value=500, value=10, step=50)
+            bet = st.number_input(f"Player{i+1} Bet:", min_value=1, max_value=500, value=50, step=50)
 
             st.session_state["PLAYERS"][i].name = name
             st.session_state["PLAYERS"][i].bet = bet
@@ -72,11 +71,19 @@ if st.session_state["iniziato"] == True:
             p.hand.addCard(st.session_state["deck"].draw())
         st.session_state["dealer"].hand.addCard(st.session_state["deck"].draw())
 
-    st.text("dealer:")
-    st.image([card.front_image for card in st.session_state["dealer"].hand.cards], width=card_width)
-    
-    for p in st.session_state["PLAYERS"]:
-        st.text(p.name)
-        st.image([card.front_image for card in p.hand.cards], width=card_width)
+    col = st.columns(len(st.session_state["PLAYERS"]), vertical_alignment="bottom", border=False)
+
+    card_width = round(-35/36 * (len(st.session_state["PLAYERS"]) -1) **2 + 105)
+
+    try:
+        for i in range(len(st.session_state["PLAYERS"])):
+            if i == len(st.session_state["PLAYERS"]) // 2:
+                col[i].text("Dealer:")
+                col[i].image([card.front_image for card in st.session_state["dealer"].hand.cards], width=card_width)
+
+            col[i].write(st.session_state["PLAYERS"][i].name)
+            col[i].image([card.front_image for card in st.session_state["PLAYERS"][i].hand.cards], width=card_width)
+    except:
+        pass
 
 st.write(st.session_state)
