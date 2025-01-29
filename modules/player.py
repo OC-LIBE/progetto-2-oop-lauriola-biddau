@@ -28,11 +28,11 @@ class Player:
 
 class HumanPlayer(Player):
 
-    def __init__(self):
+    def __init__(self, name, money):
         super().__init__()
         
-        self.name: str = ""
-        self.money: float = 1000
+        self.name: str = name
+        self.money: float = money
         self.bet: int = 0
     
 

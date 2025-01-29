@@ -41,5 +41,8 @@ class Card:
     
     @property
     def back_image(self):
-        return self.image_location  # da modificare con l'immagine retro
+        return 'static/images/Back.png'
     
+    @property
+    def width(self, nPlayers):
+        return round(-35/36 * nPlayers **2 + 105)

@@ -77,3 +77,13 @@ dove il parametro x corrisponde al numero di giocatori (`len(st.session_state["P
 ### obiettivi:
 > Programmare le possibili azioni di gioco per i giocatori e per il dealer.
 <br>
+
+## 29.01.2025:
+### aggiunte:
+> Scaricata l'immagine per il retro della carta da <https://upload.wikimedia.org/wikipedia/commons/8/86/Carta_Francese_retro_Blu.jpg">
+<br> e aggiornata la proprietà della classe Card "back_image", in modo da restituire l'immagine del retro.
+
+> Aggiunto l'oggetto Game per coordinare tutti gli altri oggetti e comunicare con app.py per l'interfaccia grafica.
+
+### note:
+> Dato il cambiamento di struttura dovuto all'introduzione di Game, bisogna sistemare ancora molte cose, come la distribuzione delle carte.
