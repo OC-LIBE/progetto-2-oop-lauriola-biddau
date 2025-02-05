@@ -40,30 +40,31 @@ def name(numPlrs):
             st.rerun()
 
 
-if st.session_state.game.nPlayers != 0:
+if st.session_state.game.nPlayers != 0 and st.session_state.game.turn != 1:
     name(st.session_state.game.nPlayers)
 
 
 if st.session_state.game.turn == 1:
 
-    for i in range(2):
-        for p in st.session_state["PLAYERS"]:
-            p.hand.addCard(st.session_state["deck"].draw())
-        st.session_state["dealer"].hand.addCard(st.session_state["deck"].draw())
+    st.session_state.game.new_game()
 
-    col = st.columns(len(st.session_state["PLAYERS"]), vertical_alignment="bottom", border=True)
-
-    card_width = round(-35/36 * (len(st.session_state["PLAYERS"]) -1) **2 + 105)
+    col = st.columns(len(st.session_state.game.Players), vertical_alignment="bottom", border=True)
 
     try:
-        for i in range(len(st.session_state["PLAYERS"])):
-            if i == len(st.session_state["PLAYERS"]) // 2:
+        for i in range(len(st.session_state.game.Players)):
+            if i == len(st.session_state.game.Players) // 2:
                 col[i].text("Dealer:")
-                col[i].image([card.front_image for card in st.session_state["dealer"].hand.cards], width=card_width)
-
-            col[i].write(st.session_state["PLAYERS"][i].name)
-            col[i].image([card.front_image for card in st.session_state["PLAYERS"][i].hand.cards], width=card_width)
+                dealer_uncovered_cards = st.session_state.game.dealer.hand.cards
+                dealer_uncovered_cards.pop(len(dealer_uncovered_cards))
+                last_card = st.session_state.game.dealer.hand.cards[len(st.session_state.game.dealer.hand.cards)]
+                if len(st.session_state.game.dealer.hand.cards) > 2:
+                    col[i].image([card.front])
+                
+            col[i].write(f"{st.session_state.game.Players[i].name}:")
+            col[i].image([card.front_image for card in st.session_state.game.Players[i].hand.cards], width=st.session_state.game.card_width)
     except:
         pass
 
 st.write(st.session_state)
+st.write(st.session_state.game.Players)
+st.write(st.session_state.game.dealer)
