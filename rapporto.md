@@ -87,3 +87,24 @@ dove il parametro x corrisponde al numero di giocatori (`len(st.session_state["P
 
 ### note:
 > Dato il cambiamento di struttura dovuto all'introduzione di Game, bisogna sistemare ancora molte cose, come la distribuzione delle carte.
+<br>
+
+## 05.02.2025:
+### aggiunte:
+> Metodo `new_game()` di `Game`, controlla la partita e chiama le funzionalità necessarie.
+
+> La seconda carta del dealer viene visualizzata coperta.
+
+### obiettivi:
+> Programmare le possibili azioni di gioco per i giocatori e per il dealer.<br>
+In particolare:<br>
+- richiedere la puntata
+- altre azioni (hit, stand, dubble down, split, insurance, surrender)
+
+### dubbi:
+> Come richiedere la puntata e l'azione a ciascun giocatore?<br>
+Possibilità:<br>
+- fare una grande form dove ognuno inserisce la propria puntata
+- bottoni per indicare l'azione
+- richiedere con un dialog a un giocatore alla volta cosa preferisce fare (opzione che sembra migliore per ora)
+<br>
