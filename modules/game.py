@@ -12,6 +12,7 @@ class Game:
         self.deck: Deck = Deck(1)
 
         self.turn = 0
+        self.bettingTime = False
     
 
     def addPlayer(self, name):
@@ -30,4 +31,17 @@ class Game:
             for p in self.Players:
                 self.deal(p)
             self.deal(self.dealer)
-                
+        
+        self.bettingTime = True
+    
+
+    def playerBet(self, player, bettedAmount):
+
+        player.bet = bettedAmount
+
+        for p in self.Players:
+            if p.bet == 0:
+                print("pass")
+                break
+            #modificaprint("stop")
+            self.bettingTime = False

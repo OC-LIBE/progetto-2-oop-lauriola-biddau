@@ -37,18 +37,25 @@ def name(numPlrs):
             for n in Names:
                 st.session_state.game.addPlayer(n)
             st.session_state.game.turn = 1
+            st.session_state.game.new_game()
             st.rerun()
 
 
-if st.session_state.game.nPlayers != 0 and st.session_state.game.turn != 1:
+if st.session_state.game.nPlayers != 0 and st.session_state.game.turn == 0:
     name(st.session_state.game.nPlayers)
 
 
-if st.session_state.game.turn == 1:
+@st.dialog("Bet")
+def bet(player):
+    with st.form(f"Bet", clear_on_submit=True, enter_to_submit=False, border=False):
+        
+        bettedAmount = st.number_input(f"Puntata {player.name}:", min_value=1, max_value=1000, value=50, step=50)
 
-    st.session_state.game.new_game()
+        if st.form_submit_button("Invia"):
+            st.session_state.game.playerBet(player, bettedAmount)
+            st.rerun()
 
-
+try:
     col = st.columns(len(st.session_state.game.Players), vertical_alignment="bottom", border=True)
 
 
@@ -74,6 +81,21 @@ if st.session_state.game.turn == 1:
                 
         col[i].write(f"{st.session_state.game.Players[i].name}:")
         col[i].image([card.front_image for card in st.session_state.game.Players[i].hand.cards], width=st.session_state.game.card_width)
+    
+
+    if st.session_state.game.bettingTime == True:
+        for i in range(len(st.session_state.game.Players)):
+
+            if st.session_state.game.Players[i].bet == 0:
+                with col[i]:
+                    if st.button("Punta", key=f"betButton{i}"):
+                        bet(st.session_state.game.Players[i])
+            else:
+                with col[i]:
+                    st.text(f"{st.session_state.game.Players[i].name} ha puntato: {st.session_state.game.Players[i].bet}")
+
+except:
+    pass
 
 
 st.write(st.session_state)
