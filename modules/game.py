@@ -24,18 +24,12 @@ class Game:
         player.hand.addCard(self.deck.draw())
 
 
-    def new_game(self):
+    def new_game(self):  # before betting
         self.card_width = round(-35/36 * (len(self.Players) -1) **2 + 105)
-
-        for i in range(2):
-            for p in self.Players:
-                self.deal(p)
-            self.deal(self.dealer)
-        
         self.bettingTime = True
     
 
-    def playerBet(self, player, bettedAmount):
+    def playerBet(self, player, bettedAmount):  # during betting
 
         player.bet = bettedAmount
         player.money -= bettedAmount
@@ -47,4 +41,13 @@ class Game:
         
         if bets == len(self.Players):
             self.bettingTime = False
-        
+            
+            for i in range(2):
+                for p in self.Players:
+                    self.deal(p)
+                self.deal(self.dealer)
+    
+
+    def playerHit(self, plr):
+        self.deal(plr)
+    

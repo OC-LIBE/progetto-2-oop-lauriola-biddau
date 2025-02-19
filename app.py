@@ -11,7 +11,7 @@ if "game" not in st.session_state:
 @st.dialog("Number of players")
 def players():
     with st.form("Players", clear_on_submit=True, enter_to_submit=False, border=False):
-        nPlayers = st.number_input("Numero giocatori", min_value=1, max_value=7, value=1, label_visibility="hidden")
+        nPlayers = st.number_input("Numero giocatori", min_value=1, max_value=50, value=1, label_visibility="hidden")
 
         if st.form_submit_button("Invia"):
 
@@ -64,38 +64,59 @@ try:
         if i == len(st.session_state.game.Players) // 2:
             col[i].text("Dealer:")
 
-            dealer_cards = []
-            for j in st.session_state.game.dealer.hand.cards:
-                dealer_cards.append(j)
+            try:
+                dealer_cards = []
+                for j in st.session_state.game.dealer.hand.cards:
+                    dealer_cards.append(j)
 
-            last_card = dealer_cards.pop()
-            last_card_image = None
-            if len(st.session_state.game.dealer.hand.cards) <= 2:
-                last_card_image = last_card.back_image
-            else:
-                last_card_image = last_card.front_image
-            
-            dealer_cards_images = [card.front_image for card in dealer_cards]
-            dealer_cards_images.append(last_card_image)
-            col[i].image(dealer_cards_images, width=st.session_state.game.card_width)
+                last_card = dealer_cards.pop()
+                last_card_image = None
+                if len(st.session_state.game.dealer.hand.cards) <= 2:
+                    last_card_image = last_card.back_image
+                else:
+                    last_card_image = last_card.front_image
+                
+                dealer_cards_images = [card.front_image for card in dealer_cards]
+                dealer_cards_images.append(last_card_image)
+                col[i].image(dealer_cards_images, width=st.session_state.game.card_width)
+            except:
+                pass
                 
         col[i].write(f"{st.session_state.game.Players[i].name}:")
-        col[i].image([card.front_image for card in st.session_state.game.Players[i].hand.cards], width=st.session_state.game.card_width)
+        try:
+            col[i].image([card.front_image for card in st.session_state.game.Players[i].hand.cards], width=st.session_state.game.card_width)
+        except:
+            pass
 
         if st.session_state.game.Players[i].bet != 0:
             col[i].text(f"{st.session_state.game.Players[i].name} ha puntato: {st.session_state.game.Players[i].bet}")
-    
 
-    if st.session_state.game.bettingTime == True:
-        for i in range(len(st.session_state.game.Players)):
-
-            if st.session_state.game.Players[i].bet == 0:
-                with col[i]:
-                    if st.button("Punta", key=f"betButton{i}"):
-                        bet(st.session_state.game.Players[i])
-
+        if st.session_state.game.Players[i].busted == True:
+            col[i].text(f"{st.session_state.game.Players[i].name} BUSTED")
 except:
     pass
+
+
+if st.session_state.game.bettingTime == True:
+    for i in range(len(st.session_state.game.Players)):
+
+        if st.session_state.game.Players[i].bet == 0:
+            with col[i]:
+                if st.button("Punta", key=f"betButton{i}"):
+                    bet(st.session_state.game.Players[i])
+
+elif st.session_state.game.bettingTime == False:
+    for i in range(len(st.session_state.game.Players)):
+
+        if st.session_state.game.Players[i].busted == False:
+            with col[i]:
+                if st.button("Hit", key=f"HitButton{i}"):
+                    st.session_state.game.playerHit(st.session_state.game.Players[i])
+                    st.rerun()
+            
+            with col[i]:
+                if st.button("Stand", key=f"StandButton{i}"):
+                    st.rerun()
 
 
 st.write(st.session_state)

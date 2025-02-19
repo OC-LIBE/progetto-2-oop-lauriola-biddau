@@ -123,3 +123,27 @@ Questi bottoni sono visualizzabili da quando in `new_game(self)` avviene `self.b
 > Programmare le possibili azioni di gioco per i giocatori e per il dealer.<br>
 In particolare:<br>
 - hit, stand, dubble down, split, insurance, surrender
+<br>
+
+## 19.02.2025 (9:35):
+### aggiunte:
+> Adesso i giocatori possono fare `Hit` per mezzo di un bottone, che dà una carta al giocatore che lo preme.
+
+> Una proprietà di HumanPlayer `busted` controlla se il giocatore ha superato 21. In quel caso, i bottoni delle azioni non vengono più visualizzati e si scrive `f"{player.nome} BUSTED"` nella colonna di tale giocatore.
+
+### obiettivi:
+> Programmare le funzionalità di `Stand`.
+
+> Programmare le funzionalità del `Dealer`.
+
+> Consegnare la vincita al giocatore vincente.
+
+> Programmare la vittoria automatica del giocatore in caso di Blackjack.
+
+> Programmare le altre possibili azioni di gioco per i giocaori.<br>
+In particolare:
+- dubble down
+- split
+- insurance
+- surrender
+<br>

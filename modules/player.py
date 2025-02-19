@@ -36,8 +36,16 @@ class HumanPlayer(Player):
         self.bet: int = 0
     
 
+    @property
+    def busted(self):
+        if self.hand.score[0] > 21 and self.hand.score[1] > 21:
+            return True
+        else:
+            return False
+
+
     def __repr__(self):
-        return f"name: {self.name}, money: {self.money}, cards: {self.hand.cards}, score: {self.hand.score[0]} or {self.hand.score[1]}, bet: {self.bet}"
+        return f"name: {self.name}, money: {self.money}, cards: {self.hand.cards}, score: {self.hand.score[0]} or {self.hand.score[1]}, bet: {self.bet}, busted: {self.busted}"
 
 
 class Dealer(Player):
