@@ -38,10 +38,13 @@ class Game:
     def playerBet(self, player, bettedAmount):
 
         player.bet = bettedAmount
+        player.money -= bettedAmount
 
+        bets = 0
         for p in self.Players:
-            if p.bet == 0:
-                print("pass")
-                break
-            #modificaprint("stop")
+            if p.bet != 0:
+                bets += 1
+        
+        if bets == len(self.Players):
             self.bettingTime = False
+        

@@ -91,7 +91,7 @@ dove il parametro x corrisponde al numero di giocatori (`len(st.session_state["P
 
 ## 05.02.2025:
 ### aggiunte:
-> Metodo `new_game()` di `Game`, controlla la partita e chiama le funzionalità necessarie.
+> Metodo `new_game(self)` di `Game`, controlla la partita e chiama le funzionalità necessarie.
 
 > La seconda carta del dealer viene visualizzata coperta.
 
@@ -108,3 +108,18 @@ Possibilità:<br>
 - bottoni per indicare l'azione
 - richiedere con un dialog a un giocatore alla volta cosa preferisce fare (opzione che sembra migliore per ora)
 <br>
+
+## 19.02.2025 (08:36):
+### aggiunte:
+> Metodo `playerBet(self, player, bettedAmount)` di `Game` che gestisce le puntate dei giocatori.<br>
+Questo metodo viene chiamato da `app.py`, più precisamente dal dialog, la cui funzione è quella di visualizzare una form in cui si richiede al giocatore la puntata. Questo dialogo viene attivato dopo che un giocatore preme il proprio bottone `Puntata`.<br>
+Questi bottoni sono visualizzabili da quando in `new_game(self)` avviene `self.bettingTime = True`.
+
+> Con `app.py`, se un giocatore ha puntato, viene visualizzata la puntata sotto le proprie carte.
+
+> in `playerBet(self, player, bettedAmount)`, `player.money -= bettedAmount` sottrae la puntata ai soldi del giocatore.
+
+### obiettivi:
+> Programmare le possibili azioni di gioco per i giocatori e per il dealer.<br>
+In particolare:<br>
+- hit, stand, dubble down, split, insurance, surrender

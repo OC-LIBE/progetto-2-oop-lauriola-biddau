@@ -81,6 +81,9 @@ try:
                 
         col[i].write(f"{st.session_state.game.Players[i].name}:")
         col[i].image([card.front_image for card in st.session_state.game.Players[i].hand.cards], width=st.session_state.game.card_width)
+
+        if st.session_state.game.Players[i].bet != 0:
+            col[i].text(f"{st.session_state.game.Players[i].name} ha puntato: {st.session_state.game.Players[i].bet}")
     
 
     if st.session_state.game.bettingTime == True:
@@ -90,9 +93,6 @@ try:
                 with col[i]:
                     if st.button("Punta", key=f"betButton{i}"):
                         bet(st.session_state.game.Players[i])
-            else:
-                with col[i]:
-                    st.text(f"{st.session_state.game.Players[i].name} ha puntato: {st.session_state.game.Players[i].bet}")
 
 except:
     pass
