@@ -34,14 +34,15 @@ def name(numPlrs):
             Names.append(name)
 
         if st.form_submit_button("Invia"):
-            for n in Names:
-                st.session_state.game.addPlayer(n)
-            st.session_state.game.turn = 1
+            for j in range(len(Names)):
+                if Names[j] == "":
+                    Names[j] = f"player{j+1}"
+                st.session_state.game.addPlayer(Names[j])
             st.session_state.game.new_game()
             st.rerun()
 
 
-if st.session_state.game.nPlayers != 0 and st.session_state.game.turn == 0:
+if st.session_state.game.nPlayers != 0 and st.session_state.game.namesGiven == False:
     name(st.session_state.game.nPlayers)
 
 
@@ -71,10 +72,12 @@ try:
 
                 last_card = dealer_cards.pop()
                 last_card_image = None
-                if len(st.session_state.game.dealer.hand.cards) <= 2:
+                if st.session_state.game.playersDone == False:
                     last_card_image = last_card.back_image
+
                 else:
                     last_card_image = last_card.front_image
+                
                 
                 dealer_cards_images = [card.front_image for card in dealer_cards]
                 dealer_cards_images.append(last_card_image)
@@ -91,8 +94,11 @@ try:
         if st.session_state.game.Players[i].bet != 0:
             col[i].text(f"{st.session_state.game.Players[i].name} ha puntato: {st.session_state.game.Players[i].bet}")
 
-        if st.session_state.game.Players[i].busted == True:
+        if st.session_state.game.Players[i].busted() == True:
             col[i].text(f"{st.session_state.game.Players[i].name} BUSTED")
+        
+        if st.session_state.game.Players[i].stood == True:
+            col[i].text(f"{st.session_state.game.Players[i].name} STOOD")
 except:
     pass
 
@@ -105,10 +111,11 @@ if st.session_state.game.bettingTime == True:
                 if st.button("Punta", key=f"betButton{i}"):
                     bet(st.session_state.game.Players[i])
 
-elif st.session_state.game.bettingTime == False:
-    for i in range(len(st.session_state.game.Players)):
 
-        if st.session_state.game.Players[i].busted == False:
+elif st.session_state.game.bettingTime == False and st.session_state.game.namesGiven == True and st.session_state.game.playersDone == False:
+    for i in range(len(st.session_state.game.Players)):
+        
+        if st.session_state.game.Players[i].busted() == False and st.session_state.game.Players[i].stood == False:
             with col[i]:
                 if st.button("Hit", key=f"HitButton{i}"):
                     st.session_state.game.playerHit(st.session_state.game.Players[i])
@@ -116,7 +123,19 @@ elif st.session_state.game.bettingTime == False:
             
             with col[i]:
                 if st.button("Stand", key=f"StandButton{i}"):
+                    st.session_state.game.playerStand(st.session_state.game.Players[i])
                     st.rerun()
+
+
+    playingPlayers = 0
+    for i in range(len(st.session_state.game.Players)):
+        if st.session_state.game.Players[i].stood == False and st.session_state.game.Players[i].busted() == False:
+            playingPlayers += 1
+
+    if playingPlayers == 0:
+        st.session_state.game.dealerTurn()
+        st.rerun()
+
 
 
 st.write(st.session_state)

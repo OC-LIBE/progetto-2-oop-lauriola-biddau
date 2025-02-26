@@ -125,7 +125,7 @@ In particolare:<br>
 - hit, stand, dubble down, split, insurance, surrender
 <br>
 
-## 19.02.2025 (9:35):
+## 19.02.2025 (09:35):
 ### aggiunte:
 > Adesso i giocatori possono fare `Hit` per mezzo di un bottone, che dà una carta al giocatore che lo preme.
 

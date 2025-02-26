@@ -11,9 +11,10 @@ class Game:
         self.dealer: Dealer = Dealer()
         self.deck: Deck = Deck(1)
 
-        self.turn = 0
+        self.namesGiven = False
         self.bettingTime = False
-    
+        self.playersDone = False
+
 
     def addPlayer(self, name):
         player: HumanPlayer = HumanPlayer(name, money=1000)
@@ -25,6 +26,7 @@ class Game:
 
 
     def new_game(self):  # before betting
+        self.namesGiven = True
         self.card_width = round(-35/36 * (len(self.Players) -1) **2 + 105)
         self.bettingTime = True
     
@@ -51,3 +53,14 @@ class Game:
     def playerHit(self, plr):
         self.deal(plr)
     
+
+    def playerStand(self, plr):
+        plr.stood = True
+    
+
+    def dealerTurn(self):
+        self.playersDone = True
+
+        if self.dealer.hand.score[0] < 16 or self.dealer.hand.score[1] < 16:
+            print("passed")
+            self.deal(self.dealer)
