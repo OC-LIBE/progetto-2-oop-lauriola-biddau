@@ -147,3 +147,26 @@ In particolare:
 - insurance
 - surrender
 <br>
+
+## 26.02.2025 e 27.02.2025:
+### aggiunte:
+> Se un giocatore fornisce un nome vuoto, gli viene assegnato il nome di `f"player{j}"`, con j = numero del giocatore.
+
+> Adesso i giocatori possono usare il bottone `Stand` quando non vogliono più pescare.
+
+> Lo stato `playersDone` permette di capire quando mostrare la seconda carta del dealer.
+
+> Il dealer pesca delle carte se la propria mano è inferiore a 17.
+
+### obiettivi:
+> Programmare il sistema per capire chi ha vinto e chi no e consegnare la vincita ai giocatori vincenti
+
+> Cosa fare nel caso in cui un giocatore o il dealer ricevono due assi? --> aggiustare casi pesca per il dealer
+
+> Programmare le altre possibili azioni di gioco per i giocaori.<br>
+In particolare:
+- dubble down
+- split
+- insurance
+- surrender
+<br>

@@ -94,7 +94,7 @@ try:
         if st.session_state.game.Players[i].bet != 0:
             col[i].text(f"{st.session_state.game.Players[i].name} ha puntato: {st.session_state.game.Players[i].bet}")
 
-        if st.session_state.game.Players[i].busted() == True:
+        if st.session_state.game.Players[i].busted == True:
             col[i].text(f"{st.session_state.game.Players[i].name} BUSTED")
         
         if st.session_state.game.Players[i].stood == True:
@@ -115,7 +115,7 @@ if st.session_state.game.bettingTime == True:
 elif st.session_state.game.bettingTime == False and st.session_state.game.namesGiven == True and st.session_state.game.playersDone == False:
     for i in range(len(st.session_state.game.Players)):
         
-        if st.session_state.game.Players[i].busted() == False and st.session_state.game.Players[i].stood == False:
+        if st.session_state.game.Players[i].busted == False and st.session_state.game.Players[i].stood == False:
             with col[i]:
                 if st.button("Hit", key=f"HitButton{i}"):
                     st.session_state.game.playerHit(st.session_state.game.Players[i])
@@ -129,7 +129,7 @@ elif st.session_state.game.bettingTime == False and st.session_state.game.namesG
 
     playingPlayers = 0
     for i in range(len(st.session_state.game.Players)):
-        if st.session_state.game.Players[i].stood == False and st.session_state.game.Players[i].busted() == False:
+        if st.session_state.game.Players[i].stood == False and st.session_state.game.Players[i].busted == False:
             playingPlayers += 1
 
     if playingPlayers == 0:

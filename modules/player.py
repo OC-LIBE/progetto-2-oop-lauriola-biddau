@@ -5,8 +5,10 @@ class Player:
     def __init__(self):
 
         self.hand = self.Hand()
+        self.stood: bool = False
 
 
+    @property
     def busted(self):
         if self.hand.score[0] > 21 and self.hand.score[1] > 21:
             return True
@@ -42,11 +44,10 @@ class HumanPlayer(Player):
         self.name: str = name
         self.money: float = money
         self.bet: int = 0
-        self.stood: bool = False
     
 
     def __repr__(self):
-        return f"name: {self.name}, money: {self.money}, cards: {self.hand.cards}, score: {self.hand.score[0]} or {self.hand.score[1]}, bet: {self.bet}, busted: {self.busted()}, standing: {self.stood}"
+        return f"name: {self.name}, money: {self.money}, cards: {self.hand.cards}, score: {self.hand.score[0]} or {self.hand.score[1]}, bet: {self.bet}, busted: {self.busted}, standing: {self.stood}"
 
 
 class Dealer(Player):
@@ -56,4 +57,4 @@ class Dealer(Player):
     
 
     def __repr__(self):
-        return f"cards: {self.hand.cards}, score: {self.hand.score[0]} or {self.hand.score[1]}"
+        return f"cards: {self.hand.cards}, score: {self.hand.score[0]} or {self.hand.score[1]} busted: {self.busted}, standing: {self.stood}"

@@ -60,7 +60,9 @@ class Game:
 
     def dealerTurn(self):
         self.playersDone = True
+        if self.dealer.busted == False:
 
-        if self.dealer.hand.score[0] < 16 or self.dealer.hand.score[1] < 16:
-            print("passed")
-            self.deal(self.dealer)
+            if (self.dealer.hand.score[0] > 21 and self.dealer.hand.score[1] < 17) or (self.dealer.hand.score[0] < 17 and self.dealer.hand.score[1] < 21):
+                self.deal(self.dealer)
+            if self.dealer.hand.score[0] < 17 and self.dealer.hand.score[1] < 17:
+                self.deal(self.dealer)
