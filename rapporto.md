@@ -170,3 +170,18 @@ In particolare:
 - insurance
 - surrender
 <br>
+
+## 21.03.2025:
+### aggiunte:
+> Cambiato il sistema di conta dei punteggi delle mani: adesso tutte le carte hanno un singolo punteggio. A causa del duplice possibile punteggio degli assi, quando viene controllato se un giocatore è andato sopra a 21 (in `player.py` con `busted()`) si controlla anche se viene trovato un asso. Se questo è presente nella mano del giocatore allora si riduce il valore di esso da 11 a 1.
+
+## obiettivi:
+> Migliorare il sistema di controllo punteggi + debugging (es: perché a volte rimane il bottone `Stand` anche se lo si è già premuto?). Occorre implementare recursività nel metodo `busted()` in `player.py`?.
+
+> Programmare le altre possibili azioni di gioco per i giocaori.<br>
+In particolare:
+- dubble down
+- split
+- insurance
+- surrender
+<br>

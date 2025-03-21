@@ -2,12 +2,14 @@ class Card:
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
+        self.usedAce = False
+
         if self.rank == 1:
-            self.card_scores = [1, 11]
+            self.card_score = 11
         elif self.rank >= 11 and self.rank <= 13:
-            self.card_scores = [10, 10]
+            self.card_score = 10
         else:
-            self.card_scores = [self.rank, self.rank]
+            self.card_score = self.rank
 
         if self.rank == 1:
             self.short_rank = 'A'

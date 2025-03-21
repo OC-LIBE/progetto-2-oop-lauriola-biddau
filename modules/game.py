@@ -14,6 +14,7 @@ class Game:
         self.namesGiven = False
         self.bettingTime = False
         self.playersDone = False
+        self.dealerDone = False
 
 
     def addPlayer(self, name):
@@ -61,8 +62,46 @@ class Game:
     def dealerTurn(self):
         self.playersDone = True
         if self.dealer.busted == False:
+            pass
+    
 
-            if (self.dealer.hand.score[0] > 21 and self.dealer.hand.score[1] < 17) or (self.dealer.hand.score[0] < 17 and self.dealer.hand.score[1] < 21):
-                self.deal(self.dealer)
-            if self.dealer.hand.score[0] < 17 and self.dealer.hand.score[1] < 17:
-                self.deal(self.dealer)
+    def checkWins(self):
+        """
+        for plr in self.Players:
+
+            win = False
+            bj = False
+            tie = False
+
+            if self.dealer.busted == True:
+
+                if plr.busted == False:
+
+                    if plr.hand.score[0] == 21 or plr.hand.score[1] == 21 and len(plr.hand.cards) == 2:
+                        bj = True
+
+                    else:
+                        win = True
+            else:
+                
+                if plr.busted == False:
+
+                    if (plr.hand.score[0] == 21 or plr.hand.score[1] == 21) and len(plr.hand.cards) == 2:
+                        if self.dealer.hand.score[0] == 21 or self.dealer.hand.score[1] == 21 and len(self.dealer.hand.cards) == 2:
+                            
+                            tie = True
+                        
+                        else:
+                            bj = True
+                    
+                    else:
+                        for sum in plr.hand.score:
+                            if sum <= 21:
+                                if self.dealer.hand.score[0] <= 21:
+                                    if sum > self.dealer.hand.score[0]:
+                                        
+                                        if self.dealer.hand.score[1] <= 21:
+                                            if sum > self.dealer.hand.score[1]:
+                                                win = True
+        """
+        
