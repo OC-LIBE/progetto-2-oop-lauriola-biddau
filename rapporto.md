@@ -207,4 +207,6 @@ In particolare:
 - split
 - insurance
 - surrender
+
+> Decorare l'interfaccia, per esempio con una foto della tovaglia di un tavolo da gioco.
 <br>
