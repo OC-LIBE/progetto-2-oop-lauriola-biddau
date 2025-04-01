@@ -15,6 +15,7 @@ class Game:
         self.bettingTime = False
         self.playersDone = False
         self.dealerDone = False
+        self.gameDone = False
 
 
     def addPlayer(self, name):
@@ -62,46 +63,70 @@ class Game:
     def dealerTurn(self):
         self.playersDone = True
         if self.dealer.busted == False:
-            pass
+            
+            if self.dealer.hand.score < 17:
+                self.deal(self.dealer)
+            else:
+                self.dealer.stood = True
+                self.dealerDone = True
+        
+        else:
+            self.dealerDone = True
     
 
     def checkWins(self):
-        """
+
         for plr in self.Players:
 
-            win = False
-            bj = False
-            tie = False
-
+            outcome = ""
+            
             if self.dealer.busted == True:
 
                 if plr.busted == False:
+                    if plr.hand.score == 21 and len(plr.hand.cards) == 2:
+                        outcome = "bj"
+                    else:
+                        outcome = "win"
 
-                    if plr.hand.score[0] == 21 or plr.hand.score[1] == 21 and len(plr.hand.cards) == 2:
-                        bj = True
+                else:
+                    outcome = "loss"
+            else:
+
+                if plr.busted == True:
+                    outcome == "loss"
+                else:
+
+                    if self.dealer.hand.score == 21 and len(self.dealer.hand.cards) == 2:
+                        
+                        if plr.hand.score == 21:
+                            if len(plr.hand.cards) == 2:
+
+                                outcome == "tie"
+                            else:
+                                outcome == "loss"
+                        else:
+                            outcome == "loss"
 
                     else:
-                        win = True
-            else:
-                
-                if plr.busted == False:
 
-                    if (plr.hand.score[0] == 21 or plr.hand.score[1] == 21) and len(plr.hand.cards) == 2:
-                        if self.dealer.hand.score[0] == 21 or self.dealer.hand.score[1] == 21 and len(self.dealer.hand.cards) == 2:
-                            
-                            tie = True
+                        if plr.hand.score == 21 and len(plr.hand.cards) == 2:
+                            outcome = "bj"
                         
                         else:
-                            bj = True
-                    
-                    else:
-                        for sum in plr.hand.score:
-                            if sum <= 21:
-                                if self.dealer.hand.score[0] <= 21:
-                                    if sum > self.dealer.hand.score[0]:
-                                        
-                                        if self.dealer.hand.score[1] <= 21:
-                                            if sum > self.dealer.hand.score[1]:
-                                                win = True
-        """
+                            if plr.hand.score > self.dealer.hand.score:
+                                outcome = "win"
+                            elif plr.hand.score == self.dealer.hand.score:
+                                outcome = "tie"
+                            else:
+                                outcome = "loss"
+
+            if outcome == "bj":
+                plr.money += 2.5 * plr.bet
+
+            elif outcome == "win":
+                plr.money += 2 * plr.bet
+            
+            elif outcome == "tie":
+                plr.money += 1 * plr.bet
         
+        self.gameDone = True

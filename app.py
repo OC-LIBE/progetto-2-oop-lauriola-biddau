@@ -138,10 +138,14 @@ elif st.session_state.game.bettingTime == False and st.session_state.game.namesG
 
         if playingPlayers == 0:
             st.session_state.game.dealerTurn()
-            print("turnnn")
             st.rerun()
-    else:
+    elif st.session_state.game.gameDone == True:
         st.session_state.game.checkWins()
+    
+    else:
+        if st.button("RESTART"):
+            del st.session_state["game"]
+            st.rerun()
     
 
 
