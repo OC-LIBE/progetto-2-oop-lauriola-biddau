@@ -141,10 +141,15 @@ elif st.session_state.game.bettingTime == False and st.session_state.game.namesG
             st.rerun()
     elif st.session_state.game.gameDone == True:
         st.session_state.game.checkWins()
+        st.rerun()
     
     else:
-        if st.button("RESTART"):
+        if st.button("CHANGE PLAYERS"):
             del st.session_state["game"]
+            st.rerun()
+        
+        if st.button("RESTART (SAME PLAYERS)"):
+            st.session_state.game.restart()
             st.rerun()
     
 

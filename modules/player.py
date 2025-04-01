@@ -22,7 +22,7 @@ class Player:
             if hasAce == False:
                 return True
             else:
-                self.busted()
+                return self.busted()
         else:
             return False
 

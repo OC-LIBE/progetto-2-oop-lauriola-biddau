@@ -122,11 +122,31 @@ class Game:
 
             if outcome == "bj":
                 plr.money += 2.5 * plr.bet
+                print("bj")
 
             elif outcome == "win":
                 plr.money += 2 * plr.bet
+                print("won")
             
             elif outcome == "tie":
                 plr.money += 1 * plr.bet
+                print("tied")
         
         self.gameDone = True
+    
+
+    def restart(self):
+        self.deck = Deck(1)
+        self.deck.shuffle()
+
+        self.bettingTime = True
+        self.playersDone = False
+        self.dealerDone = False
+        self.gameDone = False
+
+        for plr in self.Players:
+            plr.stood = False
+            plr.hand.cards = []
+            plr.bet = 0
+
+        self.dealer = Dealer()
