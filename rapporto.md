@@ -140,7 +140,7 @@ In particolare:<br>
 
 > Programmare la vittoria automatica del giocatore in caso di Blackjack.
 
-> Programmare le altre possibili azioni di gioco per i giocaori.<br>
+> Programmare le altre possibili azioni di gioco per i giocatori.<br>
 In particolare:
 - dubble down
 - split
@@ -163,7 +163,7 @@ In particolare:
 
 > Cosa fare nel caso in cui un giocatore o il dealer ricevono due assi? --> aggiustare casi pesca per il dealer
 
-> Programmare le altre possibili azioni di gioco per i giocaori.<br>
+> Programmare le altre possibili azioni di gioco per i giocatori.<br>
 In particolare:
 - dubble down
 - split
@@ -175,10 +175,33 @@ In particolare:
 ### aggiunte:
 > Cambiato il sistema di conta dei punteggi delle mani: adesso tutte le carte hanno un singolo punteggio. A causa del duplice possibile punteggio degli assi, quando viene controllato se un giocatore è andato sopra a 21 (in `player.py` con `busted()`) si controlla anche se viene trovato un asso. Se questo è presente nella mano del giocatore allora si riduce il valore di esso da 11 a 1.
 
-## obiettivi:
+### obiettivi:
 > Migliorare il sistema di controllo punteggi + debugging (es: perché a volte rimane il bottone `Stand` anche se lo si è già premuto?). Occorre implementare recursività nel metodo `busted()` in `player.py`?.
 
-> Programmare le altre possibili azioni di gioco per i giocaori.<br>
+> Programmare le altre possibili azioni di gioco per i giocatori.<br>
+In particolare:
+- dubble down
+- split
+- insurance
+- surrender
+<br>
+
+## 01.04.2025:
+### aggiunte:
+> Nel rapporto precedente (21.03.2025) si parlava già della proprietà `busted`. La recursività di cui si parlava già lì è stata implementata con `return self.busted` e serve, subito dopo aver ridotto il valore di un asso, a controllare se con questa modifica di valore il giocatore può continuare a giocare o se è irrimediabilmente sopra a 21.
+
+> Aggiunto lo stato `gameDone` in `game.py` per capire quando controllare chi ha vinto e chi ha perso
+
+> Aggiunti in `game.py` i metodi `checkWins` e `restart` per controllare chi ha vinto, chi ha fatto blackjack, chi ha perso e chi a pareggiato, rispettivamente per resettare i valori necessari a ricominciare una partita pur tenendo gli stessi giocatori e i loro soldi.
+
+> Aggiunti i bottoni `CHANGE PLAYERS` e `RESTART (SAME PLAYERS)` per ricominciare una nuova partita: si può uscire del tutto e ricominciare con nuovi giocatori oppure tenere gli stessi (`CHANGE PLAYERS`) e i loro soldi (`RESTART (SAME PLAYERS)`).
+
+> Aggiunta una puntata minima: 50
+
+### obiettivi:
+> Nonostante il poco tempo mancante per questo progetto gli obiettivi, forse per uno sviluppo futuro extrascolastico, sono i seguenti:
+
+> Programmare le altre possibili azioni di gioco per i giocatori.<br>
 In particolare:
 - dubble down
 - split

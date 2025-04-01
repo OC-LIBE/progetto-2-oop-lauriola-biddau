@@ -36,7 +36,6 @@ class Game:
     def playerBet(self, player, bettedAmount):  # during betting
 
         player.bet = bettedAmount
-        player.money -= bettedAmount
 
         bets = 0
         for p in self.Players:
@@ -76,24 +75,24 @@ class Game:
 
     def checkWins(self):
 
+
         for plr in self.Players:
 
-            outcome = ""
             
             if self.dealer.busted == True:
 
                 if plr.busted == False:
                     if plr.hand.score == 21 and len(plr.hand.cards) == 2:
-                        outcome = "bj"
+                        plr.outcome = "bj"
                     else:
-                        outcome = "win"
+                        plr.outcome = "win"
 
                 else:
-                    outcome = "loss"
+                    plr.outcome = "loss"
             else:
 
                 if plr.busted == True:
-                    outcome == "loss"
+                    plr.outcome = "loss"
                 else:
 
                     if self.dealer.hand.score == 21 and len(self.dealer.hand.cards) == 2:
@@ -101,36 +100,39 @@ class Game:
                         if plr.hand.score == 21:
                             if len(plr.hand.cards) == 2:
 
-                                outcome == "tie"
+                                plr.outcome = "tie"
                             else:
-                                outcome == "loss"
+                                plr.outcome = "loss"
                         else:
-                            outcome == "loss"
+                            plr.outcome = "loss"
 
                     else:
 
                         if plr.hand.score == 21 and len(plr.hand.cards) == 2:
-                            outcome = "bj"
+                            plr.outcome = "bj"
                         
                         else:
                             if plr.hand.score > self.dealer.hand.score:
-                                outcome = "win"
+                                plr.outcome = "win"
+
                             elif plr.hand.score == self.dealer.hand.score:
-                                outcome = "tie"
+                                plr.outcome = "tie"
+
                             else:
-                                outcome = "loss"
+                                plr.outcome = "loss"
 
-            if outcome == "bj":
-                plr.money += 2.5 * plr.bet
-                print("bj")
-
-            elif outcome == "win":
-                plr.money += 2 * plr.bet
-                print("won")
-            
-            elif outcome == "tie":
+            if plr.outcome == "bj":
+                plr.money += 1.5 * plr.bet
+                
+            elif plr.outcome == "win":
                 plr.money += 1 * plr.bet
-                print("tied")
+
+            elif plr.outcome == "tie":
+                plr.money += 0 * plr.bet
+            
+            elif plr.outcome == "loss":
+                plr.money += -1 * plr.bet
+                
         
         self.gameDone = True
     
@@ -148,5 +150,6 @@ class Game:
             plr.stood = False
             plr.hand.cards = []
             plr.bet = 0
+            plr.outcome = ""
 
         self.dealer = Dealer()

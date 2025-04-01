@@ -11,9 +11,9 @@ if "game" not in st.session_state:
 @st.dialog("Number of players")
 def players():
     with st.form("Players", clear_on_submit=True, enter_to_submit=False, border=False):
-        nPlayers = st.number_input("Numero giocatori", min_value=1, max_value=50, value=1, label_visibility="hidden")
+        nPlayers = st.number_input("Number of players", min_value=1, max_value=10, value=1, label_visibility="hidden")
 
-        if st.form_submit_button("Invia"):
+        if st.form_submit_button("Enter"):
 
             st.session_state.game.nPlayers = nPlayers
             st.session_state.game.deck.shuffle()
@@ -33,7 +33,7 @@ def name(numPlrs):
             name = st.text_input(f"Player{i+1} Name:")
             Names.append(name)
 
-        if st.form_submit_button("Invia"):
+        if st.form_submit_button("Enter"):
             for j in range(len(Names)):
                 if Names[j] == "":
                     Names[j] = f"player{j+1}"
@@ -48,13 +48,17 @@ if st.session_state.game.nPlayers != 0 and st.session_state.game.namesGiven == F
 
 @st.dialog("Bet")
 def bet(player):
-    with st.form(f"Bet", clear_on_submit=True, enter_to_submit=False, border=False):
+    if player.money >= 50:
+        with st.form(f"Bet", clear_on_submit=True, enter_to_submit=False, border=False):
         
-        bettedAmount = st.number_input(f"Puntata {player.name}:", min_value=1, max_value=player.money, value=50, step=50)
+            bettedAmount = st.number_input(f"Bet {player.name}:", min_value=50, max_value=player.money, value=50, step=50)
 
-        if st.form_submit_button("Invia"):
-            st.session_state.game.playerBet(player, bettedAmount)
-            st.rerun()
+
+            if st.form_submit_button("Enter"):
+                st.session_state.game.playerBet(player, bettedAmount)
+                st.rerun()
+    else:
+        st.text("You need 50$ or more to play!")
 
 try:
     col = st.columns(len(st.session_state.game.Players), vertical_alignment="bottom", border=True)
@@ -90,15 +94,32 @@ try:
             col[i].image([card.front_image for card in st.session_state.game.Players[i].hand.cards], width=st.session_state.game.card_width)
         except:
             pass
+        
+        col[i].text(f"money: {st.session_state.game.Players[i].money}$")
 
         if st.session_state.game.Players[i].bet != 0:
-            col[i].text(f"{st.session_state.game.Players[i].name} ha puntato: {st.session_state.game.Players[i].bet}")
+            col[i].text(f"{st.session_state.game.Players[i].name} bet: {st.session_state.game.Players[i].bet}$")
+
 
         if st.session_state.game.Players[i].busted == True:
             col[i].text(f"{st.session_state.game.Players[i].name} BUSTED")
-        
-        if st.session_state.game.Players[i].stood == True:
+
+        elif st.session_state.game.Players[i].stood == True:
             col[i].text(f"{st.session_state.game.Players[i].name} STOOD")
+
+
+        if st.session_state.game.Players[i].outcome == "bj":
+            col[i].text(f"{st.session_state.game.Players[i].name} WON WITH A BLACKJACK")
+        
+        elif st.session_state.game.Players[i].outcome == "win":
+            col[i].text(f"{st.session_state.game.Players[i].name} WON")
+        
+        elif st.session_state.game.Players[i].outcome == "tie":
+            col[i].text(f"{st.session_state.game.Players[i].name} TIED")
+
+        elif st.session_state.game.Players[i].outcome == "loss":
+            col[i].text(f"{st.session_state.game.Players[i].name} LOST")
+
 except:
     pass
 
@@ -139,7 +160,7 @@ elif st.session_state.game.bettingTime == False and st.session_state.game.namesG
         if playingPlayers == 0:
             st.session_state.game.dealerTurn()
             st.rerun()
-    elif st.session_state.game.gameDone == True:
+    elif st.session_state.game.gameDone == False:
         st.session_state.game.checkWins()
         st.rerun()
     
@@ -151,10 +172,3 @@ elif st.session_state.game.bettingTime == False and st.session_state.game.namesG
         if st.button("RESTART (SAME PLAYERS)"):
             st.session_state.game.restart()
             st.rerun()
-    
-
-
-
-st.write(st.session_state)
-st.write(st.session_state.game.Players)
-st.write(st.session_state.game.dealer)

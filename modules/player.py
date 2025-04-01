@@ -22,7 +22,7 @@ class Player:
             if hasAce == False:
                 return True
             else:
-                return self.busted()
+                return self.busted
         else:
             return False
 
@@ -55,10 +55,12 @@ class HumanPlayer(Player):
         self.name: str = name
         self.money: float = money
         self.bet: int = 0
+
+        self.outcome: str = ""
     
 
     def __repr__(self):
-        return f"name: {self.name}, money: {self.money}, cards: {self.hand.cards}, score: {self.hand.score}, bet: {self.bet}, busted: {self.busted}, standing: {self.stood}"
+        return f"name: {self.name}, money: {self.money}, cards: {self.hand.cards}, score: {self.hand.score}, bet: {self.bet}, busted: {self.busted}, standing: {self.stood}, outcome: {self.outcome}"
 
 
 class Dealer(Player):
