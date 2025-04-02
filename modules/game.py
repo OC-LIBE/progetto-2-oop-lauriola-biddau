@@ -19,7 +19,7 @@ class Game:
 
 
     def addPlayer(self, name):
-        player: HumanPlayer = HumanPlayer(name, money=1000)
+        player: HumanPlayer = HumanPlayer(name, money=1000.0)
         self.Players.append(player)
     
 
@@ -29,19 +29,21 @@ class Game:
 
     def new_game(self):  # before betting
         self.namesGiven = True
-        self.card_width = round(-35/36 * (len(self.Players) -1) **2 + 105)
+        self.card_width = 105  # round(-35/36 * (len(self.Players) -1) **2 + 105)
         self.bettingTime = True
     
 
     def playerBet(self, player, bettedAmount):  # during betting
 
         player.bet = bettedAmount
-
+        
+    
+    def dealIfBetsOver(self):
         bets = 0
         for p in self.Players:
             if p.bet != 0:
                 bets += 1
-        
+
         if bets == len(self.Players):
             self.bettingTime = False
             
@@ -146,10 +148,21 @@ class Game:
         self.dealerDone = False
         self.gameDone = False
 
+        plrsToRemove = []
+        for plr in self.Players:
+
+            if plr.money <= 0:
+                plrsToRemove.append(plrsToRemove)
+        
+        for plr in plrsToRemove:
+            self.Players.remove(plr)
+        
+        
         for plr in self.Players:
             plr.stood = False
             plr.hand.cards = []
             plr.bet = 0
             plr.outcome = ""
 
+        self.nPlayers = len(self.Players)
         self.dealer = Dealer()

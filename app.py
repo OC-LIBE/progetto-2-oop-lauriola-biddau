@@ -38,7 +38,7 @@ def name(numPlrs):
                 if Names[j] == "":
                     Names[j] = f"player{j+1}"
                 st.session_state.game.addPlayer(Names[j])
-            st.session_state.game.new_game()
+                st.session_state.game.new_game()
             st.rerun()
 
 
@@ -48,17 +48,15 @@ if st.session_state.game.nPlayers != 0 and st.session_state.game.namesGiven == F
 
 @st.dialog("Bet")
 def bet(player):
-    if player.money >= 50:
-        with st.form(f"Bet", clear_on_submit=True, enter_to_submit=False, border=False):
-        
-            bettedAmount = st.number_input(f"Bet {player.name}:", min_value=50, max_value=player.money, value=50, step=50)
+    with st.form(f"Bet", clear_on_submit=True, enter_to_submit=False, border=False):
+    
+        bettedAmount = st.number_input(f"Bet {player.name}:", min_value=50.0, max_value=player.money, value=50.0, step=50.0)
 
-
-            if st.form_submit_button("Enter"):
-                st.session_state.game.playerBet(player, bettedAmount)
-                st.rerun()
-    else:
-        st.text("You need 50$ or more to play!")
+        if st.form_submit_button("Enter"):
+            st.session_state.game.playerBet(player, bettedAmount)
+            st.session_state.game.dealIfBetsOver()
+            st.rerun()
+    
 
 try:
     col = st.columns(len(st.session_state.game.Players), vertical_alignment="bottom", border=True)
@@ -119,6 +117,9 @@ try:
 
         elif st.session_state.game.Players[i].outcome == "loss":
             col[i].text(f"{st.session_state.game.Players[i].name} LOST")
+        
+        if st.session_state.game.Players[i].money <= 0:
+            col[i].text(f"{st.session_state.game.Players[i].name} has not enough money left and will be removed on the next round!")
 
 except:
     pass
@@ -129,8 +130,9 @@ if st.session_state.game.bettingTime == True:
 
         if st.session_state.game.Players[i].bet == 0:
             with col[i]:
-                if st.button("Punta", key=f"betButton{i}"):
+                if st.button("Bet", key=f"betButton{i}"):
                     bet(st.session_state.game.Players[i])
+
 
 
 elif st.session_state.game.bettingTime == False and st.session_state.game.namesGiven == True:
@@ -172,3 +174,5 @@ elif st.session_state.game.bettingTime == False and st.session_state.game.namesG
         if st.button("RESTART (SAME PLAYERS)"):
             st.session_state.game.restart()
             st.rerun()
+
+st.text(st.session_state.game.Players)
