@@ -2,7 +2,6 @@ class Card:
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
-        self.usedAce = False
 
         if self.rank == 1:
             self.card_score = 11

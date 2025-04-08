@@ -11,12 +11,14 @@ if "game" not in st.session_state:
 @st.dialog("Number of players")
 def players():
     with st.form("Players", clear_on_submit=True, enter_to_submit=False, border=False):
-        nPlayers = st.number_input("Number of players", min_value=1, max_value=10, value=1, label_visibility="hidden")
+        
+        nPlayers = st.number_input("Number of players", min_value=1, max_value=10, value=1)
+        nDecks = st.number_input("Number of decks", min_value=1, max_value=4, value=1)
 
         if st.form_submit_button("Enter"):
 
             st.session_state.game.nPlayers = nPlayers
-            st.session_state.game.deck.shuffle()
+            st.session_state.game.nDecks = nDecks
             st.rerun()
 
 if st.session_state.game.nPlayers == 0:
@@ -38,7 +40,7 @@ def name(numPlrs):
                 if Names[j] == "":
                     Names[j] = f"player{j+1}"
                 st.session_state.game.addPlayer(Names[j])
-                st.session_state.game.new_game()
+            st.session_state.game.new_game()
             st.rerun()
 
 
@@ -174,5 +176,3 @@ elif st.session_state.game.bettingTime == False and st.session_state.game.namesG
         if st.button("RESTART (SAME PLAYERS)"):
             st.session_state.game.restart()
             st.rerun()
-
-st.text(st.session_state.game.Players)

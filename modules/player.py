@@ -39,7 +39,7 @@ class Player:
         
 
         @property
-        def score(self):  # due somme perché gli assi possono avere due valori
+        def score(self):
             sum = 0
             for card in self.cards:
                 sum += card.card_score

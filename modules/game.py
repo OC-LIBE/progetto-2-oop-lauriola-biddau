@@ -3,7 +3,6 @@ from modules.deck import Deck
 from modules.player import HumanPlayer, Dealer
 
 class Game:
-    
 
     def __init__(self):
         self.nPlayers: int = 0
@@ -12,6 +11,7 @@ class Game:
         self.deck: Deck = Deck(1)
 
         self.namesGiven = False
+        self.nDecks = 0
         self.bettingTime = False
         self.playersDone = False
         self.dealerDone = False
@@ -29,12 +29,13 @@ class Game:
 
     def new_game(self):  # before betting
         self.namesGiven = True
+        self.deck: Deck = Deck(self.nDecks)
+        self.deck.shuffle()
         self.card_width = 105  # round(-35/36 * (len(self.Players) -1) **2 + 105)
         self.bettingTime = True
     
 
     def playerBet(self, player, bettedAmount):  # during betting
-
         player.bet = bettedAmount
         
     
@@ -76,7 +77,6 @@ class Game:
     
 
     def checkWins(self):
-
 
         for plr in self.Players:
 
@@ -140,7 +140,7 @@ class Game:
     
 
     def restart(self):
-        self.deck = Deck(1)
+        self.deck = Deck(self.nDecks)
         self.deck.shuffle()
 
         self.bettingTime = True
