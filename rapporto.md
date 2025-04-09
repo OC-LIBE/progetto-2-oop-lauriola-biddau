@@ -221,6 +221,8 @@ In particolare:
 
 > Durante l'esecuzione del metodo `restart()`, in `Game`, ovvero qello chiamato se si sceglie di creare una partita mantenendo gli stessi giocatori e lo stesso numero di mazzi, dopo aver rimosso quelli senza abbastanza soldi viene effettuato un controllo per capire se ci sono ancora giocatori. Se non ce ne sono più, allora tutti gli attributi di game vengono resettati con `self.__init__()`. Questo fa sì che l'app riconosca gli stati iniziali e ricominci come da una partita nuova.
 
+> `card_width` è ora staccato dalla logica e controllato da `app.py`, e non più da `card.py` o da `game.py`.
+
 ### obiettivi:
 > Nonostante il poco tempo mancante per questo progetto gli obiettivi, forse per uno sviluppo futuro extrascolastico, sono i seguenti:
 
@@ -232,4 +234,11 @@ In particolare:
 - surrender
 
 > Decorare l'interfaccia, per esempio con una foto della tovaglia di un tavolo da gioco.
+
+> In `checkWins()` (in `game.py`), 10 e A deve contare come un blackjack? Attualmente sì. Si controlla se si ha fatto 21 e se si hanno solo 2 carte.
+
+> Ispirazioni da presentazioni:
+- regole gioco (pagina iniziale di marazza-bernasconi)
+- suggerimenti di gioco (prof su de vito-bazzurri)
+- AI player con metodi di card counting (rete neurale per il bot di de vito-bazzurri)
 <br>

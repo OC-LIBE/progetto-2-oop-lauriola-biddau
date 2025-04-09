@@ -85,13 +85,13 @@ try:
                 
                 dealer_cards_images = [card.front_image for card in dealer_cards]
                 dealer_cards_images.append(last_card_image)
-                col[i].image(dealer_cards_images, width=st.session_state.game.card_width)
+                col[i].image(dealer_cards_images, width=105)  # round(-35/36 * (len(st.session_state.Players) -1) **2 + 105)
             except:
                 pass
                 
         col[i].write(f"{st.session_state.game.Players[i].name}:")
         try:
-            col[i].image([card.front_image for card in st.session_state.game.Players[i].hand.cards], width=st.session_state.game.card_width)
+            col[i].image([card.front_image for card in st.session_state.game.Players[i].hand.cards], width=105)  # round(-35/36 * (len(st.session_state.Players) -1) **2 + 105)
         except:
             pass
         

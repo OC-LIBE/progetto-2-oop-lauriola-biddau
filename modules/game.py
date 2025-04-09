@@ -1,4 +1,3 @@
-from modules.card import Card
 from modules.deck import Deck
 from modules.player import HumanPlayer, Dealer
 
@@ -31,7 +30,6 @@ class Game:
         self.namesGiven = True
         self.deck: Deck = Deck(self.nDecks)
         self.deck.shuffle()
-        self.card_width = 105  # round(-35/36 * (len(self.Players) -1) **2 + 105)
         self.bettingTime = True
     
 
