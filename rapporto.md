@@ -220,3 +220,16 @@ In particolare:
 > Aggiustato il vecchio bug che impediva di rimuovere i giocatori: andava usato `plrsToRemove.append(plr)` e non  `plrsToRemove.append(plrsToRemove)` (che non aveva senso, perché non aggiungeva il giocatore (`plr`) che viene controllato per capire se ha abbastanza soldi).
 
 > Durante l'esecuzione del metodo `restart()`, in `Game`, ovvero qello chiamato se si sceglie di creare una partita mantenendo gli stessi giocatori e lo stesso numero di mazzi, dopo aver rimosso quelli senza abbastanza soldi viene effettuato un controllo per capire se ci sono ancora giocatori. Se non ce ne sono più, allora tutti gli attributi di game vengono resettati con `self.__init__()`. Questo fa sì che l'app riconosca gli stati iniziali e ricominci come da una partita nuova.
+
+### obiettivi:
+> Nonostante il poco tempo mancante per questo progetto gli obiettivi, forse per uno sviluppo futuro extrascolastico, sono i seguenti:
+
+> Programmare le altre possibili azioni di gioco per i giocatori.<br>
+In particolare:
+- dubble down
+- split
+- insurance
+- surrender
+
+> Decorare l'interfaccia, per esempio con una foto della tovaglia di un tavolo da gioco.
+<br>
