@@ -151,18 +151,22 @@ class Game:
         plrsToRemove = []
         for plr in self.Players:
 
-            if plr.money <= 0:
-                plrsToRemove.append(plrsToRemove)
+            if plr.money < 50:
+                plrsToRemove.append(plr)
         
         for plr in plrsToRemove:
             self.Players.remove(plr)
         
+        if len(self.Players) > 0:
         
-        for plr in self.Players:
-            plr.stood = False
-            plr.hand.cards = []
-            plr.bet = 0
-            plr.outcome = ""
+            for plr in self.Players:
+                plr.stood = False
+                plr.hand.cards = []
+                plr.bet = 0
+                plr.outcome = ""
 
-        self.nPlayers = len(self.Players)
-        self.dealer = Dealer()
+            self.nPlayers = len(self.Players)
+            self.dealer = Dealer()
+        
+        else:
+            self.__init__()

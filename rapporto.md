@@ -210,3 +210,13 @@ In particolare:
 
 > Decorare l'interfaccia, per esempio con una foto della tovaglia di un tavolo da gioco.
 <br>
+
+## 09.04.2025
+### aggiunte:
+> Insieme al numero di giocatori è chiesto il numero di mazzi desiderato, che viene salvato nell'attributo `nDecks` di `Game`.
+
+> I giocatori che non hanno abbastanza soldi per la puntata minima (50$) vengono eliminati nella partita dopo. Una volta finita una partita, i giocatori che non possono permettersene un'altra vengono avvisati che saranno rimossi tramite una scritta dentro alla loro colonna.
+
+> Aggiustato il vecchio bug che impediva di rimuovere i giocatori: andava usato `plrsToRemove.append(plr)` e non  `plrsToRemove.append(plrsToRemove)` (che non aveva senso, perché non aggiungeva il giocatore (`plr`) che viene controllato per capire se ha abbastanza soldi).
+
+> Durante l'esecuzione del metodo `restart()`, in `Game`, ovvero qello chiamato se si sceglie di creare una partita mantenendo gli stessi giocatori e lo stesso numero di mazzi, dopo aver rimosso quelli senza abbastanza soldi viene effettuato un controllo per capire se ci sono ancora giocatori. Se non ce ne sono più, allora tutti gli attributi di game vengono resettati con `self.__init__()`. Questo fa sì che l'app riconosca gli stati iniziali e ricominci come da una partita nuova.

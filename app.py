@@ -120,7 +120,7 @@ try:
         elif st.session_state.game.Players[i].outcome == "loss":
             col[i].text(f"{st.session_state.game.Players[i].name} LOST")
         
-        if st.session_state.game.Players[i].money <= 0:
+        if st.session_state.game.Players[i].money < 50:
             col[i].text(f"{st.session_state.game.Players[i].name} has not enough money left and will be removed on the next round!")
 
 except:
