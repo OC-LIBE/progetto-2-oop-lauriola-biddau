@@ -221,7 +221,7 @@ In particolare:
 
 > Durante l'esecuzione del metodo `restart()`, in `Game`, ovvero qello chiamato se si sceglie di creare una partita mantenendo gli stessi giocatori e lo stesso numero di mazzi, dopo aver rimosso quelli senza abbastanza soldi viene effettuato un controllo per capire se ci sono ancora giocatori. Se non ce ne sono più, allora tutti gli attributi di game vengono resettati con `self.__init__()`. Questo fa sì che l'app riconosca gli stati iniziali e ricominci come da una partita nuova.
 
-> `card_width` è ora staccato dalla logica e controllato da `app.py`, e non più da `card.py` o da `game.py`.
+> `card_width` è ora staccato dalla logica e controllato da `app.py`, e non più da `card.py` o da `game.py`. È stata inoltre rimossa la funzione `-35/36 * x**2 + 105` (vedi 25.01.2025). `card_width` è ora fisso a 105.
 
 ### obiettivi:
 > Nonostante il poco tempo mancante per questo progetto gli obiettivi, forse per uno sviluppo futuro extrascolastico, sono i seguenti:
@@ -241,4 +241,34 @@ In particolare:
 - regole gioco (pagina iniziale di marazza-bernasconi)
 - suggerimenti di gioco (prof su de vito-bazzurri)
 - AI player con metodi di card counting (rete neurale per il bot di de vito-bazzurri)
+<br>
+
+
+## 15.04.2025
+### aggiunte:
+> Per i giocatori umani c'è ora la possibilità di fare "double down" ovvero raddoppiare la puntata, ricevere un'ultima carta, infatti un giocatore che sceglie double down non può più pescare. Per questo è stato aggiunto un nuovo stato nella classe player: la bool `doubleDown`, che serve quindi a far capire che il giocatore non ha altre azioni nella partita corrente perché ha scelto double down. (se non si hanno abbastanza soldi per farlo allora scegliere double down fa fare all in).
+
+> Un metodo chiamato `checkBj` in game per mette di controllare se il giocatore che viene passato come argomento ha o no un blackjack in mano. Questo è utile quando, prima dei controlli delle vincite, si vuole impedire ai giocatori che hanno già un blackjack di fare ulteriori azioni. La vincita verrà poi controllata dopo, dato che anche il dealer potrebbe fare blackjack.
+
+>
+
+### obiettivi:
+> Nonostante il poco tempo mancante per questo progetto gli obiettivi, forse per uno sviluppo futuro extrascolastico, sono i seguenti:
+
+> Programmare le altre possibili azioni di gioco per i giocatori.<br>
+In particolare:
+- split
+- insurance
+- surrender
+
+> Decorare l'interfaccia, per esempio con una foto della tovaglia di un tavolo da gioco.
+
+> Ottimizzare la visualizzazione degli elementi di gioco: per esempio come va stabilita la grandezza delle carte.
+
+> In `checkWins()` (in `game.py`), 10 e A deve contare come un blackjack? Attualmente sì. Si controlla se si ha fatto 21 e se si hanno solo 2 carte.
+
+> Ispirazioni da presentazioni:
+- regole gioco (pagina iniziale di marazza-bernasconi)
+- suggerimenti di gioco (idea prof su de vito-bazzurri)
+- AI player con metodi di card counting (rete neurale per il bot di de vito-bazzurri + idee prof + idee mie)
 <br>

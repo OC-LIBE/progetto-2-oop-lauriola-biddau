@@ -12,7 +12,7 @@ if "game" not in st.session_state:
 def players():
     with st.form("Players", clear_on_submit=True, enter_to_submit=False, border=False):
         
-        nPlayers = st.number_input("Number of players", min_value=1, max_value=10, value=1)
+        nPlayers = st.number_input("Number of players", min_value=1, max_value=15, value=1)
         nDecks = st.number_input("Number of decks", min_value=1, max_value=4, value=1)
 
         if st.form_submit_button("Enter"):
@@ -106,6 +106,9 @@ try:
 
         elif st.session_state.game.Players[i].stood == True:
             col[i].text(f"{st.session_state.game.Players[i].name} STOOD")
+        
+        elif st.session_state.game.Players[i].doubleDown == True:
+            col[i].text(f"{st.session_state.game.Players[i].name} DOUBLED DOWN")
 
 
         if st.session_state.game.Players[i].outcome == "bj":
@@ -138,26 +141,39 @@ if st.session_state.game.bettingTime == True:
 
 
 elif st.session_state.game.bettingTime == False and st.session_state.game.namesGiven == True:
-    
+
     if st.session_state.game.playersDone == False:
         for i in range(len(st.session_state.game.Players)):
             
-            if st.session_state.game.Players[i].busted == False and st.session_state.game.Players[i].stood == False:
+            blackjack = st.session_state.game.checkBj(st.session_state.game.Players[i])
+
+            if st.session_state.game.Players[i].busted == False and st.session_state.game.Players[i].stood == False and st.session_state.game.Players[i].doubleDown == False and blackjack == False:
+
                 with col[i]:
                     if st.button("Hit", key=f"HitButton{i}"):
                         st.session_state.game.playerHit(st.session_state.game.Players[i])
                         st.rerun()
                 
                 with col[i]:
+                    if st.button("Double down", key=f"DoubleDownButton{i}"):
+                        st.session_state.game.doubleDown(st.session_state.game.Players[i])
+                        st.rerun()
+                
+                with col[i]:
                     if st.button("Stand", key=f"StandButton{i}"):
                         st.session_state.game.playerStand(st.session_state.game.Players[i])
                         st.rerun()
+            
+            if st.session_state.game.checkBj(st.session_state.game.Players[i]) == True:
+                col[i].text(f"{st.session_state.game.Players[i].name} HAS A BLACKJACK!")
+
 
 
     if st.session_state.game.dealerDone == False:
         playingPlayers = 0
         for i in range(len(st.session_state.game.Players)):
-            if st.session_state.game.Players[i].stood == False and st.session_state.game.Players[i].busted == False:
+            blackjack = st.session_state.game.checkBj(st.session_state.game.Players[i])
+            if st.session_state.game.Players[i].stood == False and st.session_state.game.Players[i].busted == False and st.session_state.game.Players[i].doubleDown == False and blackjack == False:
                 playingPlayers += 1
                 
 

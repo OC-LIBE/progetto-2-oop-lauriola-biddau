@@ -55,12 +55,13 @@ class HumanPlayer(Player):
         self.name: str = name
         self.money: float = money
         self.bet: int = 0
+        self.doubleDown: bool = False
 
         self.outcome: str = ""
     
 
     def __repr__(self):
-        return f"name: {self.name}, money: {self.money}, cards: {self.hand.cards}, score: {self.hand.score}, bet: {self.bet}, busted: {self.busted}, standing: {self.stood}, outcome: {self.outcome}"
+        return f"name: {self.name}, money: {self.money}, cards: {self.hand.cards}, score: {self.hand.score}, bet: {self.bet}, busted: {self.busted}, standing: {self.stood}, double down: {self.doubleDown}, outcome: {self.outcome}"
 
 
 class Dealer(Player):

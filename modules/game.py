@@ -52,6 +52,13 @@ class Game:
                 self.deal(self.dealer)
     
 
+    def checkBj(self, plr) -> bool:
+        if plr.hand.score == 21 and len(plr.hand.cards) == 2:
+            return True
+        else:
+            return False
+    
+
     def playerHit(self, plr):
         self.deal(plr)
     
@@ -59,6 +66,15 @@ class Game:
     def playerStand(self, plr):
         plr.stood = True
     
+
+    def doubleDown(self, plr):
+        self.deal(plr)
+        plr.bet *= 2
+        if plr.bet > plr.money:
+            plr.bet = plr.money
+
+        plr.doubleDown = True
+
 
     def dealerTurn(self):
         self.playersDone = True
@@ -159,6 +175,7 @@ class Game:
         
             for plr in self.Players:
                 plr.stood = False
+                plr.doubleDown = False
                 plr.hand.cards = []
                 plr.bet = 0
                 plr.outcome = ""
