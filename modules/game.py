@@ -7,7 +7,6 @@ class Game:
         self.nPlayers: int = 0
         self.Players: list[HumanPlayer] = []
         self.dealer: Dealer = Dealer()
-        self.deck: Deck = Deck(1)
 
         self.namesGiven = False
         self.nDecks = 0

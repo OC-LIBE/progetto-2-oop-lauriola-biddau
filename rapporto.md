@@ -243,14 +243,11 @@ In particolare:
 - AI player con metodi di card counting (rete neurale per il bot di de vito-bazzurri)
 <br>
 
-
 ## 15.04.2025
 ### aggiunte:
 > Per i giocatori umani c'è ora la possibilità di fare "double down" ovvero raddoppiare la puntata, ricevere un'ultima carta, infatti un giocatore che sceglie double down non può più pescare. Per questo è stato aggiunto un nuovo stato nella classe player: la bool `doubleDown`, che serve quindi a far capire che il giocatore non ha altre azioni nella partita corrente perché ha scelto double down. (se non si hanno abbastanza soldi per farlo allora scegliere double down fa fare all in).
 
 > Un metodo chiamato `checkBj` in game per mette di controllare se il giocatore che viene passato come argomento ha o no un blackjack in mano. Questo è utile quando, prima dei controlli delle vincite, si vuole impedire ai giocatori che hanno già un blackjack di fare ulteriori azioni. La vincita verrà poi controllata dopo, dato che anche il dealer potrebbe fare blackjack.
-
->
 
 ### obiettivi:
 > Nonostante il poco tempo mancante per questo progetto gli obiettivi, forse per uno sviluppo futuro extrascolastico, sono i seguenti:
@@ -270,5 +267,16 @@ In particolare:
 > Ispirazioni da presentazioni:
 - regole gioco (pagina iniziale di marazza-bernasconi)
 - suggerimenti di gioco (idea prof su de vito-bazzurri)
-- AI player con metodi di card counting (rete neurale per il bot di de vito-bazzurri + idee prof + idee mie)
+- AI player con metodi di card counting (idea rete neurale per il bot di de vito-bazzurri + idee prof + idee mie)
+<br>
+
+
+## 16.04.2025
+### modifiche:
+> Tolta linea di codice `self.deck: Deck = Deck(1)` in `game.py`, perché era inutile. La creazione del mazzo era già stata affidata al metodo `new_game()`, in cui vengono creati il numero di mazzi che i giocatori scelgono.
+
+> max decks impostato a 6 (`nDecks = st.number_input("Number of decks", min_value=1, max_value=6, value=1)`)
+
+### ispirazioni da presentazioni:
+- 
 <br>

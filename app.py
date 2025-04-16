@@ -12,8 +12,8 @@ if "game" not in st.session_state:
 def players():
     with st.form("Players", clear_on_submit=True, enter_to_submit=False, border=False):
         
-        nPlayers = st.number_input("Number of players", min_value=1, max_value=15, value=1)
-        nDecks = st.number_input("Number of decks", min_value=1, max_value=4, value=1)
+        nPlayers = st.number_input("Number of players", min_value=1, max_value=20, value=1)
+        nDecks = st.number_input("Number of decks", min_value=1, max_value=6, value=1)
 
         if st.form_submit_button("Enter"):
 
