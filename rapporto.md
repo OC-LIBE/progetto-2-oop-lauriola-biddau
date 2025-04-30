@@ -280,3 +280,7 @@ In particolare:
 ### ispirazioni da presentazioni:
 - 
 <br>
+
+
+## 30.04.2025
+commento: commit per scovare eventuali problemi nel pushare da un computer locale.
